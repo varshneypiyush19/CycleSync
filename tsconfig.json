@@ -11,6 +11,6 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    "app/Questions_Screen/Birthday.tsx"
+    "app-example/Birthday.tsx"
   ]
 }

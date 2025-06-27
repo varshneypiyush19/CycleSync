@@ -107,23 +107,76 @@
 //     margin: 20,
 //   },
 // });
-import React, { useState } from "react";
-import { Dimensions, StyleSheet, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
 import { CalendarList } from "react-native-calendars";
 
-const screenWidth = Dimensions.get("window").width;
+const LastPeriodDate = ({ inputValue, setInputValue }) => {
+  const [selectedDates, setSelectedDates] = useState({});
 
-const LastPeriodDate = () => {
-  const [selectedDates, setSelectedDates] = useState<Record<string, any>>({});
+  useEffect(() => {
+    if (inputValue) {
+      // Pre-fill selected date when going back
+      setSelectedDates({
+        [inputValue]: {
+          selected: true,
+          marked: true,
+          customStyles: {
+            container: {
+              backgroundColor: "#fff",
+              borderColor: "#EAA4FA",
+              borderWidth: 1.5,
+              borderRadius: 999,
+              width: 28,
+              height: 28,
+              alignItems: "center",
+              justifyContent: "center",
+            },
+            text: {
+              color: "#000",
+              fontWeight: "bold",
+            },
+          },
+        },
+      });
+    }
+  }, [inputValue]);
 
-  const handleDayPress = (day: { dateString: string }) => {
-    const { dateString } = day;
-    const updated = { ...selectedDates };
+  // const handleDayPress = (day: { dateString: string }) => {
+  //   const { dateString } = day;
+  //   // const updated = { ...selectedDates };
 
-    if (updated[dateString]) {
-      delete updated[dateString];
-    } else {
-      updated[dateString] = {
+  //   if (updated[dateString]) {
+  //     delete updated[dateString];
+  //   } else {
+  //     updated[dateString] = {
+  //       selected: true,
+  //       marked: true,
+  //       customStyles: {
+  //         container: {
+  //           backgroundColor: "#fff",
+  //           borderColor: "#EAA4FA",
+  //           borderWidth: 1.5,
+  //           borderRadius: 999,
+  //           width: 28,
+  //           height: 28,
+  //           alignItems: "center",
+  //           justifyContent: "center",
+  //         },
+  //         text: {
+  //           color: "#000",
+  //           fontWeight: "bold",
+  //         },
+  //       },
+  //     };
+  //   }
+  //   setSelectedDates(updated);
+  // };
+  const handleDayPress = (day) => {
+    const dateString = day.dateString;
+
+    const updated = {
+      [dateString]: {
         selected: true,
         marked: true,
         customStyles: {
@@ -142,11 +195,12 @@ const LastPeriodDate = () => {
             fontWeight: "bold",
           },
         },
-      };
-    }
-    setSelectedDates(updated);
-  };
+      },
+    };
 
+    setSelectedDates(updated);
+    setInputValue(dateString); // ✅ Store selected value
+  };
   return (
     <View style={styles.wrapper}>
       <CalendarList

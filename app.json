@@ -7,7 +7,6 @@
     "icon": "./assets/images/logo.png",
     "scheme": "cyclesync",
     "userInterfaceStyle": "automatic",
-
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/images/logo.png",
@@ -32,7 +31,10 @@
       "output": "static",
       "favicon": "./assets/images/logo.png"
     },
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router",
+      "expo-web-browser"
+    ],
     "experiments": {
       "typedRoutes": true
     }

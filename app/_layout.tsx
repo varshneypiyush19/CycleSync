@@ -47,7 +47,7 @@ export default function RootLayout() {
           headerShown: false,
         }}
       />
-      {/* <Stack.Screen name="Birthday" options={{ headerShown: false }} /> */}
+      <Stack.Screen name="Main" options={{ headerShown: false }} />
     </Stack>
   );
 }
